@@ -18,8 +18,8 @@ namespace ProductShop
             using (var context = new ProductShopContext())
             {
                 // var inputJson = File.ReadAllText("./../../../Datasets/categories-products.json");
-                var result = GetCategoriesByProductsCount(context);
-
+                var result = GetUsersWithProducts(context);
+                
                 Console.WriteLine(result);
             }
         }
@@ -108,7 +108,7 @@ namespace ProductShop
                         .ToList()
                 })
                 .ToList();
-
+           
             var json = JsonConvert.SerializeObject(users, Formatting.Indented);
 
             return json;
@@ -130,8 +130,51 @@ namespace ProductShop
                         .ToString("F2")
                 })
                 .ToList();
-
+            
             var json = JsonConvert.SerializeObject(categories,Formatting.Indented);
+
+            return json;
+        }
+
+        public static string GetUsersWithProducts(ProductShopContext context)
+        {
+            var users = context.Users
+                .Where(user => user.ProductsSold
+                    .Any(product => product.Buyer != null))
+                .OrderByDescending(user => user.ProductsSold
+                    .Count(product => product.Buyer != null))
+                .Select(user => new UserWithProductsDTO
+                {
+                    Firstname = user.FirstName,
+                    LastName = user.LastName,
+                    Age = user.Age,
+                    SoldProducts = new UserSoldProductDTO
+                    {
+                        Count = user.ProductsSold.Count(product => product.Buyer != null),
+                        Products = user.ProductsSold
+                            .Where(product => product.Buyer != null)
+                            .Select(product => new ProductNameAndPriceDTO
+                            {
+                                Name = product.Name,
+                                Price = product.Price
+                            })
+                            .ToList()
+                    }
+                    
+                })
+                .ToList();
+            var result = new ResultDTO
+            {
+                UsersCount = users.Count,
+                Users = users 
+            };
+
+            var settings = new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore
+            };
+
+            var json = JsonConvert.SerializeObject(result, Formatting.Indented, settings);
 
             return json;
         }

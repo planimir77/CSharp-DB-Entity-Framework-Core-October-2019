@@ -33,10 +33,7 @@ namespace CarDealer
                 //Console.WriteLine(ImportCustomers(context, inputJsonCustomers));
                 //Console.WriteLine(ImportSales(context, inputJsonSales));
 
-                //var expectedOutputValue = "[{\"fullName\":\"Emmitt Benally\",\"boughtCars\":2,\"spentMoney\":12176.73},{\"fullName\":\"Natalie Poli\",\"boughtCars\":3,\"spentMoney\":9376.39},{\"fullName\":\"Marcelle Griego\",\"boughtCars\":1,\"spentMoney\":6211.03},{\"fullName\":\"Zada Attwood\",\"boughtCars\":1,\"spentMoney\":3405.02},{\"fullName\":\"Lino Subia\",\"boughtCars\":1,\"spentMoney\":1246.67},{\"fullName\":\"Hai Everton\",\"boughtCars\":1,\"spentMoney\":267.32}]";
-                //Console.WriteLine(expectedOutputValue.Length);
-                //var partOfStr = expectedOutputValue.Substring(0,14);
-                //Console.WriteLine(JsonConvert.SerializeObject(partOfStr, Formatting.Indented));
+                
                 Console.WriteLine(GetSalesWithAppliedDiscount(context));
 
             }
@@ -63,13 +60,7 @@ namespace CarDealer
 
             var json = JsonConvert.SerializeObject(sales, Formatting.Indented);
 
-            return json;
-            //Get first 10 sales with information about
-            //      the car,
-            //      customer and
-            //      price of the sale
-            //          with and
-            //          without discount. 
+            return json; 
         }
         public static string GetTotalSalesByCustomer(CarDealerContext context)
         {

@@ -10,7 +10,6 @@ namespace CarDealer
     {
         public CarDealerProfile()
         {
-        
         }
     }
 }

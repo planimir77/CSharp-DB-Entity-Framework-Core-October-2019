@@ -9,15 +9,15 @@ namespace CarDealer
     {
         public CarDealerProfile()
         {
-            this.CreateMap<SupplierDto, Supplier>();
+            //this.CreateMap<SupplierDto, Supplier>();
 
-            this.CreateMap<PartDto, Part>();
+            //this.CreateMap<PartDto, Part>();
 
-            this.CreateMap<CarDto, Car>();
+            //this.CreateMap<CarDto, Car>();
 
-            this.CreateMap<ImportCustomerDto, Customer>();
+            //this.CreateMap<ImportCustomerDto, Customer>();
 
-            this.CreateMap<ImportSaleDto, Sale>();
+            //this.CreateMap<ImportSaleDto, Sale>();
         }
     }
 }

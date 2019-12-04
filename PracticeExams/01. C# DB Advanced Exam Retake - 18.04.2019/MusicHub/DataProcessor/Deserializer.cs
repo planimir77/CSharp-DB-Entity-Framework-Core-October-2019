@@ -192,13 +192,13 @@ namespace MusicHub.DataProcessor
                     if (context.Songs.Find(songDtoId.Id) != null && entity == 0)
                     {
 
-                        var partCar = new SongPerformer
+                        var songPerformer = new SongPerformer
                         {
                             Performer = performer,
                             SongId = songDtoId.Id
                         };
 
-                        songPerformers.Add(partCar);
+                        songPerformers.Add(songPerformer);
                     }
                 }
                 performers.Add(performer);

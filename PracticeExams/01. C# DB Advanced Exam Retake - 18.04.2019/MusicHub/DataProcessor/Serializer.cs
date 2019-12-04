@@ -20,7 +20,7 @@ namespace MusicHub.DataProcessor
     {
         public static string ExportAlbumsInfo(MusicHubDbContext context, int producerId)
         {
-            var songsJson = context.Producers
+            var songsDto = context.Producers
                 .Find(producerId)
                 .Albums
                 .Select(album => new ExportAlbumsInfoDto
@@ -42,9 +42,9 @@ namespace MusicHub.DataProcessor
                 .OrderByDescending(dto => Convert.ToDecimal(dto.AlbumPrice))
                 .ToList();
 
-            var result = JsonConvert.SerializeObject(songsJson, Formatting.Indented);
+            var json = JsonConvert.SerializeObject(songsDto, Formatting.Indented);
            
-            return result;
+            return json;
         }
 
         public static string ExportSongsAboveDuration(MusicHubDbContext context, int duration)

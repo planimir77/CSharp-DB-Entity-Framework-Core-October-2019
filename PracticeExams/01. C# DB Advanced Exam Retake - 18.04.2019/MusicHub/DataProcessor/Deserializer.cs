@@ -217,7 +217,7 @@ namespace MusicHub.DataProcessor
 
         private static bool IsValid(object entity)
         {
-            var validationContext = new ValidationContext(entity);
+            ValidationContext validationContext = new ValidationContext(entity);
             var validationResult = new List<ValidationResult>();
 
             return Validator.TryValidateObject(

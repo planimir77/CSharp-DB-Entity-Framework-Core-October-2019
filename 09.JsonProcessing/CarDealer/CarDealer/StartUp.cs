@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using AutoMapper;
 using CarDealer.Data;
 using CarDealer.DTO;
@@ -26,6 +27,31 @@ namespace CarDealer
                 //var inputJsonCars = File.ReadAllText("./../../../Datasets/cars.json");
                 //var inputJsonCustomers = File.ReadAllText("./../../../Datasets/customers.json");
                 //var inputJsonSales = File.ReadAllText("./../../../Datasets/sales.json");
+                var test = File.ReadAllText(@"D:\Users\EliteBook 840\Downloads\Captura-master\Captura-master\src\Captura\bin\Debug\Languages\en.json");
+                var newText = File.ReadAllText(@"C:\Users\EliteBook 840 G2\Desktop\test.txt").Split(Environment.NewLine);
+                Dictionary<string, string> jsonStr = JsonConvert.DeserializeObject<Dictionary<string, string>>(test);
+                var newJson = new Dictionary<string, string>();
+
+                var index = 0;
+
+                foreach (var VARIABLE in jsonStr)
+                {
+                    Console.WriteLine(VARIABLE.Value);
+                    //json[VARIABLE.Key] = newText[index];
+                    newJson.Add(VARIABLE.Key, newText[index]);
+                    //Console.WriteLine(json["About"]);
+                    index++;
+                }
+
+                string json = JsonConvert.SerializeObject(newJson, Formatting.Indented);
+                File.WriteAllText(@"C:\Users\EliteBook 840 G2\Desktop\bg.json",json,Encoding.Unicode);
+                
+                //var result = json.Split(':').ToArray();
+                //foreach (var word in result)
+                //{
+                //    Console.WriteLine(word[1]);
+                //}
+                
 
                 //Console.WriteLine(ImportSuppliers(context, inputJsonSuppliers));
                 //Console.WriteLine(ImportParts(context, inputJsonParts));
